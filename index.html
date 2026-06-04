@@ -532,9 +532,11 @@
 
     /* ── ORGANIZERS ── */
     .organizers-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 1.2rem;
+
     }
 
     .org-card {
@@ -544,6 +546,7 @@
       padding: 1.4rem;
       text-align: center;
       transition: border-color .2s;
+      flex: 0 0 calc(25% - 0.9rem);
     }
 
     .org-card:hover { border-color: var(--border-hi); }
@@ -622,6 +625,7 @@
       .cfp-grid { grid-template-columns: 1fr; gap: 3rem; }
       .topics-grid { grid-template-columns: 1fr 1fr; }
       .organizers-grid { grid-template-columns: repeat(2, 1fr); }
+      .org-card { flex: 0 0 calc(50% - 0.6rem); }
     }
 
     @media (max-width: 600px) {
@@ -631,6 +635,7 @@
       .topics-grid { grid-template-columns: 1fr; }
       .organizers-grid { grid-template-columns: repeat(2, 1fr); }
       .hero-meta { gap: 1.5rem; }
+      .org-card { flex: 0 0 calc(50% - 0.6rem); }
     }
   </style>
 </head>
@@ -954,24 +959,25 @@
           <div class="org-affil">University of Venice</div>
         </div>
         <div class="org-card">
-          <div class="org-avatar">?</div>
-          <div class="org-name">Organizer TBA</div>
-          <div class="org-affil">Affiliation TBA</div>
+         <div class="org-avatar">
+            <img src="assets/st_profile_picture.png" alt="Organizer avatar" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
+          </div>
+          <div class="org-name">Seshu Tirupathi</div>
+          <div class="org-affil">IBM Research Europe</div>
         </div>
         <div class="org-card">
-          <div class="org-avatar">?</div>
-          <div class="org-name">Organizer TBA</div>
-          <div class="org-affil">Affiliation TBA</div>
+              <div class="org-avatar">
+                <img src="assets/gz_profile_picture.png" alt="Organizer avatar" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
+              </div>
+          <div class="org-name">Giulio Zizzo</div>
+          <div class="org-affil">IBM Research Europe</div>
         </div>
         <div class="org-card">
-          <div class="org-avatar">?</div>
-          <div class="org-name">Organizer TBA</div>
-          <div class="org-affil">Affiliation TBA</div>
-        </div>
-        <div class="org-card">
-          <div class="org-avatar">?</div>
-          <div class="org-name">Organizer TBA</div>
-          <div class="org-affil">Affiliation TBA</div>
+          <div class="org-avatar">
+            <img src="assets/jdk_profile_picture.png" alt="Organizer avatar" style="width:100%;height:100%;object-fit:cover;border-radius:50%;object-position:center 20%;" />
+          </div>
+          <div class="org-name">John D. Kelleher</div>
+          <div class="org-affil">ADAPT Research Centre & Trinity College Dublin</div>
         </div>
       </div>
     </div>
