@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>StRICt @ NeurIPS 2026 — Structuring Reasoning for Interpretability and Control</title>
+  <title>StRICt @ NeurIPS 2026 — Structured Reasoning for Interpretability and Control</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -51,12 +51,9 @@
     body::after {
       content: '';
       position: fixed;
-      top: -30%;
-      left: -20%;
-      width: 80vw;
-      height: 80vw;
-      background: radial-gradient(ellipse at 30% 40%, rgba(91,141,246,.07) 0%, transparent 65%),
-                  radial-gradient(ellipse at 75% 20%, rgba(139,92,246,.06) 0%, transparent 55%);
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 25% 15%, rgba(91,141,246,.07) 0%, transparent 70%),
+                  radial-gradient(ellipse 55% 45% at 80% 10%, rgba(139,92,246,.06) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
@@ -397,16 +394,6 @@
     .topic-card h3 { font-size: .95rem; margin-bottom: .5rem; }
     .topic-card p { font-size: .87rem; color: var(--muted); line-height: 1.55; }
 
-    /* ── QUESTIONS ── */
-    #questions .questions-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
     .q-item {
       padding: 1.5rem 2rem;
       border-bottom: 1px solid var(--border);
@@ -437,7 +424,7 @@
     .q-text strong { color: var(--heading); font-weight: 700; }
 
     /* ── RELATED ── */
-    #related .pill-list {
+    .pill-list {
       display: flex;
       flex-wrap: wrap;
       gap: .6rem;
@@ -578,6 +565,46 @@
       font-family: 'DM Mono', monospace;
     }
 
+    /* ── PROGRAM COMMITTEE ── */
+    .pc-heading {
+      margin-top: 4.5rem;
+    }
+
+    .pc-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2.2rem 1.4rem;
+      margin-top: 3rem;
+    }
+
+    .pc-member {
+      text-align: center;
+    }
+
+    .pc-name {
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--heading);
+      letter-spacing: -.01em;
+      line-height: 1.25;
+    }
+
+    .pc-affil {
+      margin-top: .25rem;
+      font-style: italic;
+      font-size: .71rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    @media (max-width: 899px) {
+      .pc-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      .pc-grid { grid-template-columns: repeat(2, 1fr); gap: 1.8rem 1rem; }
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
@@ -647,9 +674,8 @@
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#topics">Topics</a></li>
-      <li><a href="#questions">Questions</a></li>
       <li><a href="#cfp">Submit</a></li>
-      <li><a href="#organizers">Organizers</a></li>
+      <li><a href="#organizers">Committee</a></li>
     </ul>
   </nav>
 
@@ -657,7 +683,7 @@
   <section id="hero">
     <div class="wrapper">
       <p class="hero-eyebrow">NeurIPS 2026 Workshop</p>
-      <h1 class="hero-title"><em>Structuring</em> Reasoning for <em>Interpretability</em> and <em>Control</em></h1>
+      <h1 class="hero-title"><em>Structured</em> Reasoning for <em>Interpretability</em> and <em>Control</em></h1>
       <p class="hero-sub">Bringing together efficient reasoning, mechanistic interpretability, and AI safety to build principled structure into Large Reasoning Models.</p>
       <div class="hero-meta">
         <div class="meta-item">
@@ -687,15 +713,15 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="wrapper">
-      <div class="section-rule"><span class="section-label">Motivation</span></div>
+      <div class="section-rule"><span class="section-label">About</span></div>
       <div class="about-grid">
         <div class="reveal">
           <h2>The reasoning process is opaque.</h2>
-          <p class="about-lead">Large Reasoning Models generate long, unstructured traces — and we can't see inside them.</p>
+          <p class="about-lead">Large Reasoning Models do not make the structure that underlies their reasoning explicit during generation.</p>
           <p>LRMs solve complex problems by allocating substantial computation before answering. Rather than producing a response directly, they generate a long reasoning trace and condition the final answer on it. These models have achieved strong performance gains in mathematical reasoning, code generation and multi-step inference.</p>
-          <p>Yet they introduce a new and largely unaddressed challenge: their reasoning process is unstructured, and thus neither interpretable nor controllable. Models output monolithic sequences of thousands of tokens, do not explicitly segment or annotate reasoning steps during generation, and their internal representations do not expose clean boundaries between reasoning stages.</p>
+          <p>Yet they introduce a new and largely unaddressed challenge: whatever structure underlies their reasoning process is not made explicit during generation, leaving it difficult to interpret or control.  Models output monolithic sequences of thousands of tokens, do not explicitly segment or annotate reasoning steps, and their internal representations do not expose clean boundaries between reasoning stages.</p>
           <div class="highlight-block">
-            <p>We argue these challenges share a common root: <strong>the absence of principled structure in the reasoning process</strong>. Revealing structure enables observation — and observation enables control.</p>
+            <p>Structure <strong>can be revealed</strong>, for example in attention patterns, though text segmentation and annotation, and in latent representations, but it remains <strong>inaccessible without targeted analysis</strong> and is hardly surfaced at inference time.</p>
           </div>
         </div>
         <div class="reveal" style="transition-delay:.1s">
@@ -731,7 +757,7 @@
           </div>
           <div style="margin-top:2rem;padding:1.2rem 1.4rem;border:1px solid var(--border);border-radius:8px;background:rgba(52,211,153,.04);border-color:rgba(52,211,153,.2)">
             <p style="font-size:.85rem;color:var(--muted);margin:0">
-              <strong style="color:var(--accent3)">Why a workshop?</strong> Work on these problems is scattered across ML communities — efficient reasoning, mechanistic interpretability, and AI safety each has its own vocabulary and venues. No single community owns the question of reasoning structure. StRICt is designed to build the shared vocabulary these efforts currently lack, with a program centred on <em>cross-community interaction</em> rather than back-to-back talks.
+              <strong style="color:var(--accent3)">Why a workshop?</strong> Work on these problems is scattered across ML communities: efficient reasoning, mechanistic interpretability, and AI safety each has its own vocabulary and venues. No single community owns the question of reasoning structure. StRICt is designed to build the shared vocabulary these efforts currently lack.
             </p>
           </div>
         </div>
@@ -742,7 +768,7 @@
   <!-- TOPICS -->
   <section id="topics">
     <div class="wrapper">
-      <div class="section-rule"><span class="section-label">Call for Papers</span></div>
+      <div class="section-rule"><span class="section-label">Topics</span></div>
       <h2 class="reveal">Topics of Interest</h2>
       <p class="reveal" style="max-width:65ch;margin-bottom:2.5rem;transition-delay:.05s">StRICt welcomes submissions exploring the structure of reasoning traces at both the text level and hidden-state level, and how that structure can enhance the controllability, safety, and efficiency of LRMs.</p>
       <div class="topics-grid">
@@ -784,45 +810,8 @@
         </div>
 
       </div>
-    </div>
-  </section>
 
-  <!-- QUESTIONS -->
-  <section id="questions">
-    <div class="wrapper">
-      <div class="section-rule"><span class="section-label">Open Problems</span></div>
-      <h2 class="reveal">Questions StRICt Will Address</h2>
-      <div class="questions-list reveal" style="margin-top:2rem;transition-delay:.1s">
-
-        <div class="q-item">
-          <span class="q-index">Q1</span>
-          <span class="q-text"><strong>Representation of computation.</strong> How should reasoning traces be segmented? What is the right level of abstraction, and does it align with the model's internal computation?</span>
-        </div>
-
-        <div class="q-item">
-          <span class="q-index">Q2</span>
-          <span class="q-text"><strong>Faithfulness of generation.</strong> Does the generated text align with the model's internals? Which parts of the reasoning process are most — and least — faithful to the underlying computation?</span>
-        </div>
-
-        <div class="q-item">
-          <span class="q-index">Q3</span>
-          <span class="q-text"><strong>Controllability of the reasoning chain.</strong> How can we monitor models effectively? Which control methods work best — test-time scaling, activation steering, structured prompting? Does segmentation affect controllability?</span>
-        </div>
-
-        <div class="q-item">
-          <span class="q-index">Q4</span>
-          <span class="q-text"><strong>Safety of the reasoning chain.</strong> Can unsafe reasoning behaviour be detected before output is produced, using step-level or hidden-state monitoring? Is the reasoning trace a faithful safety signal, or can it be obfuscated? What does robust online monitoring look like under adversarial pressure?</span>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- RELATED WORKSHOPS -->
-  <section id="related">
-    <div class="wrapper">
-      <div class="section-rule"><span class="section-label">Context</span></div>
-      <h2 class="reveal">Related Workshops</h2>
+      <h2 class="reveal" style="margin-top:4.5rem">Related Workshops</h2>
       <p class="reveal" style="max-width:60ch;transition-delay:.05s">StRICt sits at the intersection of several active research communities at NeurIPS. Related workshops include:</p>
       <div class="pill-list reveal" style="transition-delay:.1s">
         <span class="pill">Efficient Reasoning</span>
@@ -838,7 +827,7 @@
   <!-- CFP / TIMELINE -->
   <section id="cfp">
     <div class="wrapper">
-      <div class="section-rule"><span class="section-label">Submissions</span></div>
+      <div class="section-rule"><span class="section-label">Submit</span></div>
       <div class="cfp-grid">
         <div class="reveal">
           <h2>Call for Papers</h2>
@@ -927,7 +916,7 @@
   <!-- ORGANIZERS -->
   <section id="organizers">
     <div class="wrapper">
-      <div class="section-rule"><span class="section-label">Team</span></div>
+      <div class="section-rule"><span class="section-label">Committee</span></div>
       <h2 class="reveal">Organizers</h2>
       <div class="organizers-grid reveal" style="transition-delay:.1s">
         <div class="org-card">
@@ -980,36 +969,53 @@
           <div class="org-affil">ADAPT Research Centre & Trinity College Dublin</div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Program Committee  -->
-  <section id="Program Committee">
-    <div class="wrapper">
-      <div class="section-rule"><span class="section-label"></span></div>
-      <h2 class="reveal">Program Committee Members</h2>
-      <p class="reveal" style="margin-bottom:2.5rem;color:var(--muted);transition-delay:.05s">To be announced.</p>
-      <div class="organizers-grid reveal" style="transition-delay:.1s">
-        <div class="org-card">
-          <div class="org-avatar">?</div>
-          <div class="org-name">PC TBA</div>
-          <div class="org-affil">Affiliation TBA</div>
-        </div>
-        <div class="org-card">
-          <div class="org-avatar">?</div>
-          <div class="org-name">PC TBA</div>
-          <div class="org-affil">Affiliation TBA</div>
-        </div>
-        <div class="org-card">
-          <div class="org-avatar">?</div>
-          <div class="org-name">PC TBA</div>
-          <div class="org-affil">Affiliation TBA</div>
-        </div>
-        <div class="org-card">
-          <div class="org-avatar">?</div>
-          <div class="org-name">PC TBA</div>
-          <div class="org-affil">Affiliation TBA</div>
-        </div>
+      <h2 class="reveal pc-heading">Program Committee Members</h2>
+      <div class="pc-grid reveal" style="transition-delay:.1s">
+        <div class="pc-member"><div class="pc-name">Yuchen Zeng</div><div class="pc-affil">Microsoft Research</div></div>
+        <div class="pc-member"><div class="pc-name">Lea Schönherr</div><div class="pc-affil">CISPA</div></div>
+        <div class="pc-member"><div class="pc-name">Nikolai Rozanov</div><div class="pc-affil">Imperial College London</div></div>
+        <div class="pc-member"><div class="pc-name">Lukas Aichberger</div><div class="pc-affil">Johannes Kepler University Linz</div></div>
+        <div class="pc-member"><div class="pc-name">Sania Nayab</div><div class="pc-affil">Scuola Superiore Sant’Anna Pisa</div></div>
+        <div class="pc-member"><div class="pc-name">Jing Xu</div><div class="pc-affil">University of York</div></div>
+        <div class="pc-member"><div class="pc-name">Yangjun Zhang</div><div class="pc-affil">Alan Turing Institute</div></div>
+        <div class="pc-member"><div class="pc-name">Philipp Mondorf</div><div class="pc-affil">LMU Munich</div></div>
+        <div class="pc-member"><div class="pc-name">Sadid Hasan</div><div class="pc-affil">Microsoft</div></div>
+        <div class="pc-member"><div class="pc-name">Liz McQuillan</div><div class="pc-affil">Google</div></div>
+        <div class="pc-member"><div class="pc-name">Henrike Beyer</div><div class="pc-affil">University of Dundee</div></div>
+        <div class="pc-member"><div class="pc-name">Aritra Guha</div><div class="pc-affil">AT&amp;T</div></div>
+        <div class="pc-member"><div class="pc-name">Aziza Mirsaidova</div><div class="pc-affil">Oracle, Stanford University</div></div>
+        <div class="pc-member"><div class="pc-name">Sayambhu Sen</div><div class="pc-affil">Amazon</div></div>
+        <div class="pc-member"><div class="pc-name">Tirtharaj Dash</div><div class="pc-affil">BITS Pilani Goa</div></div>
+        <div class="pc-member"><div class="pc-name">Aoqi Zuo</div><div class="pc-affil">University of Sydney</div></div>
+        <div class="pc-member"><div class="pc-name">Rishabh Jain</div><div class="pc-affil">eBay Inc.</div></div>
+        <div class="pc-member"><div class="pc-name">Ashish Gupta</div><div class="pc-affil">ServiceNow</div></div>
+        <div class="pc-member"><div class="pc-name">Tommaso Felice Banfi</div><div class="pc-affil">ETH, CERN, Politecnico di Milano</div></div>
+        <div class="pc-member"><div class="pc-name">Charan S. Guruswamy</div><div class="pc-affil">Amazon</div></div>
+        <div class="pc-member"><div class="pc-name">Victory Idowu</div><div class="pc-affil">UCL</div></div>
+        <div class="pc-member"><div class="pc-name">Zhenhao Li</div><div class="pc-affil">Epic Games</div></div>
+        <div class="pc-member"><div class="pc-name">Alina Nesen</div><div class="pc-affil">Target Corp, Purdue University</div></div>
+        <div class="pc-member"><div class="pc-name">Wenhao Lu</div><div class="pc-affil">University of Hamburg</div></div>
+        <div class="pc-member"><div class="pc-name">Omran Berjawi</div><div class="pc-affil">Télécom Paris</div></div>
+        <div class="pc-member"><div class="pc-name">Gianfranco Lombardo</div><div class="pc-affil">University of Parma</div></div>
+        <div class="pc-member"><div class="pc-name">Ayush Sunil Munot</div><div class="pc-affil">IIT Kharagpur</div></div>
+        <div class="pc-member"><div class="pc-name">Nitu Sharaff</div><div class="pc-affil">Google</div></div>
+        <div class="pc-member"><div class="pc-name">Joshua Placidi</div><div class="pc-affil">Imperial College London</div></div>
+        <div class="pc-member"><div class="pc-name">Jiuding Duan</div><div class="pc-affil">Engelhart CTP</div></div>
+        <div class="pc-member"><div class="pc-name">Gauri Sarode</div><div class="pc-affil">DoorDash</div></div>
+        <div class="pc-member"><div class="pc-name">Pin-Ying Wu</div><div class="pc-affil">TSMC</div></div>
+        <div class="pc-member"><div class="pc-name">Sarah Wilson</div><div class="pc-affil">Columbia University</div></div>
+        <div class="pc-member"><div class="pc-name">Luís Seabra Lopes</div><div class="pc-affil">Universidade de Aveiro</div></div>
+        <div class="pc-member"><div class="pc-name">Anna Balcer</div><div class="pc-affil">Imperial College London</div></div>
+        <div class="pc-member"><div class="pc-name">Li Quan</div><div class="pc-affil">Pioneer Centre for AI</div></div>
+        <div class="pc-member"><div class="pc-name">Muhammad Rashid</div><div class="pc-affil">University of Torino</div></div>
+        <div class="pc-member"><div class="pc-name">Kajal Kansal</div><div class="pc-affil">BITS Pilani Dubai</div></div>
+        <div class="pc-member"><div class="pc-name">Zhibao Mian</div><div class="pc-affil">University of Hull</div></div>
+        <div class="pc-member"><div class="pc-name">Hans Krupakar</div><div class="pc-affil">BITS Pilani Hyderabad</div></div>
+        <div class="pc-member"><div class="pc-name">Swetang Krishna</div><div class="pc-affil">ADAPT Centre, Trinity College Dublin</div></div>
+        <div class="pc-member"><div class="pc-name">Khoa Tran</div><div class="pc-affil">SKKU</div></div>
+        <div class="pc-member"><div class="pc-name">Muhammad Asaf</div><div class="pc-affil">University of Calabria</div></div>
+        <div class="pc-member"><div class="pc-name">Bikram Pratim Bhuyan</div><div class="pc-affil">École Centrale d’Électronique Paris</div></div>
       </div>
     </div>
   </section>
