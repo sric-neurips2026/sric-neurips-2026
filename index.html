@@ -718,13 +718,11 @@
       <div class="section-rule"><span class="section-label">About</span></div>
       <div class="about-grid">
         <div class="reveal">
-          <h2>The reasoning process is opaque.</h2>
           <p class="about-lead">Large Reasoning Models do not make the structure that underlies their reasoning explicit during generation.</p>
           <p>LRMs solve complex problems by allocating substantial computation before answering. Rather than producing a response directly, they generate a long reasoning trace and condition the final answer on it. These models have achieved strong performance gains in mathematical reasoning, code generation and multi-step inference.</p>
           <p>Yet they introduce a new and largely unaddressed challenge: whatever structure underlies their reasoning process is not made explicit during generation, leaving it difficult to interpret or control.  Models output monolithic sequences of thousands of tokens, do not explicitly segment or annotate reasoning steps, and their internal representations do not expose clean boundaries between reasoning stages.</p>
-          <div class="highlight-block">
-            <p>Structure <strong>can be revealed</strong>, for example in attention patterns, though text segmentation and annotation, and in latent representations, but it remains <strong>inaccessible without targeted analysis</strong> and is hardly surfaced at inference time.</p>
-          </div>
+          <p>Structure can be revealed, e.g. in attention patterns, through text segmentation and annotation, and in latent representations. But it remains inaccessible without targeted analysis, and is hardly surfaced at inference time. 
+             This lack of structure has concrete costs: traces are verbose and redundant, leading to inefficiency; exploration of the solution space is unguided and unmonitored; the generated text is sometimes unfaithful to the model's computation; and the thinking process constitutes a novel attack surface, leaving LRMs vulnerable to jailbreaking and adversarial manipulation.</p>
         </div>
         <div class="reveal" style="transition-delay:.1s">
           <div class="why-cards">
